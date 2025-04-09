@@ -394,10 +394,12 @@ input.hoursInput {
     <option value="">Sélectionnez Equipe</option>
 </select>
 
-<p class="summary"><span id="selectedCount">0</span> Ouvriers<button onclick="OPED()">Envoyer</button> <button onclick="toggleSelectAll()"> tout</button><a href="https://abdermb98.github.io/sanap/">
+<p class="summary"><span id="selectedCount">0</span> <input type="number" id="defaultHours" value="8" min="0" step="0.5" style="width: 60px; text-align: center; font-size: large;font-weight: 800; background-color: #4a90e2;color: #ffffff;"><button onclick="OPED()">Envoyer</button> <button onclick="toggleSelectAll()"> tout</button><a href="https://abdermb98.github.io/sanap/">
     <button class="plus-button" >P</button><a href="https://abdermb98.github.io/finca20/">
     <button class="plus-button" >DP</button>
 </a></p>
+
+
 
 <table>
     
@@ -609,26 +611,26 @@ function updateRowSelection(row, selected) {
     const h9 = ["7411116"];
     const h10 = ["4211111136"];
       const fix = ["7415", "1111111", "4263"];
-    if (selected) {
-        row.classList.add("selected");
+      if (selected) {
+    row.classList.add("selected");
 
-        if (h12.includes(codeValue)) {
-            hoursInput.value = 11;
-            
-        }
-        else if (h9.includes(codeValue)) {
-            hoursInput.value = 9;
-        }else if (h10.includes(codeValue)) {
-            hoursInput.value = 10;
-        }else if (fix.includes(codeValue)) {
-            hoursInput.value = 8;
-        } else if (hoursInput.value == 0) {
-            hoursInput.value = 7;
-        }
-    } else {
-        row.classList.remove("selected");
-        hoursInput.value = 0;
+    if (h12.includes(codeValue)) {
+        hoursInput.value = 11;
+    } else if (h9.includes(codeValue)) {
+        hoursInput.value = 9;
+    } else if (h10.includes(codeValue)) {
+        hoursInput.value = 10;
+    } else if (fix.includes(codeValue)) {
+        hoursInput.value = 8;
+    } else if (hoursInput.value == 0) {
+        const defaultHours = document.getElementById("defaultHours").value;
+        hoursInput.value = defaultHours;
     }
+} else {
+    row.classList.remove("selected");
+    hoursInput.value = 0;
+}
+
 
     updateSelectedCount();
 }
